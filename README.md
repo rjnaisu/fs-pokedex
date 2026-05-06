@@ -2,6 +2,10 @@
 
 This repository is used for the CI/CD module of the Full Stack Open course
 
+## Deployment
+
+The app is deployed using fly.io and can be found [here](https://fs-pokedex-hidden-willow-8527.fly.dev)
+
 ## Commands
 
 Start by running `npm install` inside the project folder
