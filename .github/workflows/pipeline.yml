@@ -48,7 +48,12 @@ jobs:
   deploy:
     name: Deploy app
     needs: [checks, e2e_tests]
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: >-
+      ${{ 
+        github.event_name == 'push' 
+        && github.ref == 'refs/heads/main' 
+        && !contains(join(github.event.commits.*.message, ' '), '#skip') 
+      }}
     runs-on: ubuntu-latest
     concurrency: deploy-group    # optional: ensure only one action runs at a time
     steps:
@@ -61,7 +66,12 @@ jobs:
   tag_release:
     name: Bump version and push tag
     needs: [checks, e2e_tests, deploy]
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: >-
+      ${{ 
+        github.event_name == 'push' 
+        && github.ref == 'refs/heads/main' 
+        && !contains(join(github.event.commits.*.message, ' '), '#skip')
+      }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
