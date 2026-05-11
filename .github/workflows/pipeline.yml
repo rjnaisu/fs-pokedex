@@ -23,6 +23,12 @@ jobs:
           npm run eslint
           npm run test
           npm run build
+      - uses: sarisia/actions-status-discord@v1
+        if: failure()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Build failed
+          status: ${{ job.status }}
 
   e2e_tests:
     timeout-minutes: 60
@@ -62,6 +68,12 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - uses: sarisia/actions-status-discord@v1
+        if: success()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Deployed Successfully
+          status: ${{ job.status }}
   
   tag_release:
     name: Bump version and push tag
