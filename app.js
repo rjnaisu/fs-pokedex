@@ -11,7 +11,8 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.status(500).send('Error')
+  //res.send('ok')
 })
 
 const start = async () => {
