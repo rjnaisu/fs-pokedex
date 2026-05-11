@@ -81,10 +81,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: sarisia/actions-status-discord@v1
-          with:
-            webhook: ${{ secrets.DISCORD_WEBHOOK }}
-            title: Deployed Successfully
-            status: ${{ job.status }}
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Deployed Successfully
+          status: ${{ job.status }}
 
 
   notify_failure:
@@ -93,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: sarisia/actions-status-discord@v1
-          with:
-            webhook: ${{ secrets.DISCORD_WEBHOOK }}
-            title: Build failed
-            status: ${{ job.status }}
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Build failed
+          status: ${{ job.status }}
